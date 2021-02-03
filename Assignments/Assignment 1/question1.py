@@ -1,7 +1,7 @@
 ###
 # Michael Buffone
 # February 2nd, 2021
-# COSC4106 Assignment 1
+# COSC4106 Assignment 1 : Question 1
 #
 # Given a string of characters, count the number of substrings that start with an A and end with a B. 
 # For example, there are four such substrings in CABAAXBYA, i.e. AB, ABAAXB, AAXB, AXB. 
@@ -25,11 +25,13 @@ def countAB(userString):
         for j in range(i+1, len(userString)):
             if userString[i] == "A" and userString[j] == "B":
                 print("Substring found:", userString[i:j+1])
-                count+=1
+                count += 1
     return count
 # End countAB #
 
+# Start of main #
 print("-----")
 userString = input("Please enter a string: ")
 print("The number of substrings that start with an A and end with a B is", countAB(userString))
 print("-----")
+# End of main #
