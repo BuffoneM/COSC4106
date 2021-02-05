@@ -29,9 +29,11 @@ def countAB(userString):
     return count
 # End countAB #
 
-# Start of main #
-print("-----")
-userString = input("Please enter a string: ")
-print("The number of substrings that start with an A and end with a B is", countAB(userString))
-print("-----")
-# End of main #
+def main():
+    print("-----")
+    userString = input("Please enter a string: ")
+    print("The number of substrings that start with an A and end with a B is", countAB(userString))
+    print("-----")
+    
+if __name__ == "__main__":
+    main()

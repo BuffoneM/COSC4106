@@ -20,28 +20,47 @@
 # The largest value that fits into the knapsack: 21.
 ###
 
-# Start of Item definition #
-class Item:
-    itemCount = 0
+def findPowerSet(userList):
+    powerSet = [[]]
+    # for every element in userList
+    for item in userList:
+        # for every subset in the powerset
+        for subSet in powerSet:
+        # add the subset plus the current item to the powerset
+            powerSet = powerSet + [(subSet + [item])]
+    print(powerSet)
 
-    def __init__(self, weight, value):
-        self.weight = weight
-        self.value = value
-        Item.itemCount += 1
+    # sum all of the items in the power set
+    newArray = []
+    for item in powerSet:
+         newArray.append(sum(item))
+
+    return newArray
     
-    def showItem(self):
-        print("Weight:", self.weight, "Value:", self.value)
-# End Item definition #
+def main():
+    print("-----")
+    # data declaration
+    value = -1
+    capacity = 9
+    tempArrayWeight = [8, 4, 5]
+    tempArrayValue = [20, 10, 11]
 
-# Start of main #
-print("-----")
-myList = [
-            Item(8, 20),
-            Item(4, 10),
-            Item(5, 11)
-         ]
+    print("Calculating the power sets:")
+    tempArrayWeight = findPowerSet(tempArrayWeight)
+    tempArrayValue = findPowerSet(tempArrayValue)
+    print()
+    print(tempArrayWeight)
+    print(tempArrayValue)
+    print()
 
-for items in myList:
-    items.showItem()
-print("-----")
-# End of main #
+    # get the best value for the weight
+    for i in range(0, len(tempArrayWeight)):
+        if tempArrayWeight[i] <= capacity and value < tempArrayValue[i]:
+            value = tempArrayValue[i]
+
+    print("The capacity of the knapsack is", capacity)
+    print("The largest value that fits into the knapsack:", value)
+    print("-----")
+
+if __name__ == "__main__":
+    main()
