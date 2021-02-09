@@ -17,10 +17,11 @@ def countAB(userString):
     # Let i be the A we are looking for
     # Let j be the B we are looking for
     for i in range(0, len(userString)):
-        for j in range(i, len(userString)):
-            if userString[i] == "A" and userString[j] == "B":
-                print("Substring found:", userString[i:j+1])
-                count += 1
+        if userString[i] == "A":
+            for j in range(i, len(userString)):
+                if userString[j] == "B":
+                    print("Substring found:", userString[i:j+1])
+                    count += 1
     return count
 # End countAB #
 
