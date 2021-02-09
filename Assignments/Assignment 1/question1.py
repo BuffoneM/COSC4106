@@ -12,17 +12,12 @@
 # Start of countAB function #
 def countAB(userString):
 
-    # Pre condition that the string is only 2 letters long
-    if userString == "AB":
-        print("Substring found:", userString)
-        count = 1
-    else:
-        count = 0
+    count = 0
 
-    # Let i be the A we are looking for, go to the second last letter
+    # Let i be the A we are looking for
     # Let j be the B we are looking for
-    for i in range(0, len(userString)-2):
-        for j in range(i+1, len(userString)):
+    for i in range(0, len(userString)):
+        for j in range(i, len(userString)):
             if userString[i] == "A" and userString[j] == "B":
                 print("Substring found:", userString[i:j+1])
                 count += 1
