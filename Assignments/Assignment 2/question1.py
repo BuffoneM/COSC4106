@@ -13,8 +13,8 @@
 
 def countInversions(array, index):
     # -if the array is empty, return 0
-    # -if we've compared all items, remove the first element 
-    #  in the array and continue at index 0
+    # -if we've compared all items, remove the first element in the
+    #  array and restart at index 1 (We don't compare the item to itself)
     if(array == []):
         return 0
     if(index == len(array)):
