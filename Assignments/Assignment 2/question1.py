@@ -3,51 +3,45 @@
 # February 14th, 2021
 # COSC4106 Assignment 2 : Question 1
 #
-# Let a[0..n-1] be an array of n distinct integers. A pair (a[i], a[j]) is said to 
+# Let a[0..n-1] be an array of n distinct integers. A pair (a[i], a[j]) is said to
 # be an inversion if these numbers are out of order, i.e., i < j but a[i] > a[j].
 #
 # For example: if array a contains the following numbers: 9, 8, 4, 5
-# then the number of inversions is 5. 
+# then the number of inversions is 5.
 # (inversions are 9 > 8,  9 > 4,  9 > 5,  8 > 4,  8 > 5)
 ###
 
-def countInversions(array):
-    print(array)
-    if len(array) <= 1:
-        return
+def mergeSort(array, tempArray, left, right):
+    count = 0
+    if left >= right:
+        return count
     
-    halfPoint = len(array) // 2
-    leftArray = array[:halfPoint]
-    rightArray = array[halfPoint:]
+    middle = (left + right) // 2
+    count += mergeSort(array, tempArray, left, middle)
+    count += mergeSort(array, tempArray, middle + 1, right)
+    count += mergeInversions(array, tempArray, left, middle, right)
     
-    countInversions(leftArray)
-    countInversions(rightArray)
+
+def mergeInversions(array, tempArray, left, middle, right):
+    i = left
+    j = middle + 1
+    k = left
+    count = 0
     
-    leftIndex = 0
-    rightIndex = 0
-    i = 0
-    
-    while i < len(leftArray) and rightIndex < len(rightArray):
-        if leftArray[leftIndex] < rightArray[rightIndex]:
-            array[i] = leftArray[leftIndex]
-            leftIndex += 1
+    while i <= mid and j <= right:
+        if array[i] <= array[j]:
+            tempArray[k] = array[i]
+            i += 1
+            k += 1
         else:
-            array[i] = rightArray[rightIndex]
-            rightIndex += 1  
-        i += 1
-        
-    # Adding the remaining elements to the array
-    while leftIndex < len(leftArray):
-        array[i] = leftArray[leftIndex]
-        i += 1
-        leftIndex += 1
-        
-    while rightIndex < len(rightArray):
-        array[i] = rightArray[rightIndex]
-        i += 1
-        rightIndex += 1
-        
+            tempArray[k] = array[j]
+            count += middle - i + 1
+            j += 1
+            k += 1
     
+
+    
+
 
 def countInversions2(array, index):
     # -if the array is empty, return 0
@@ -58,8 +52,8 @@ def countInversions2(array, index):
     if(index == len(array)):
         print()
         return countInversions2(array[1:], 1)
-    
-    print(array, " at ", index, ": ", end="", sep="")    
+
+    print(array, " at ", index, ": ", end="", sep="")
 
     # recursive call- if inversion, add 1
     if(array[0] > array[index]):
@@ -68,14 +62,18 @@ def countInversions2(array, index):
     else:
         print(array[0], "!>", array[index])
         return countInversions2(array, index + 1)
-    
+
+
 def main():
     print("-----")
     print("The inversion pairs are:")
-    array = [9, 8, 4, 5, 99, 112, 1]
-    print("The number of inversions with the array", array, "is:", countInversions(array))
+    array = [9, 8, 4, 5]
+    nA, count = mergeSortInversions(array)
+    print("The number of inversions with the array", array, "is:", count)    
+    #print("The number of inversions with the array", array, "is:", mergeSortInversions(array))
 
     print("-----")
+
 
 if __name__ == "__main__":
     main()
