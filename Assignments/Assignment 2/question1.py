@@ -12,21 +12,42 @@
 ###
 
 def countInversions(array):
+    print(array)
     if len(array) <= 1:
         return
-    if(len(array) == 2):
-        if array[0] > array[1]:
-            print("Inversion pair:", array[0], ">", array[1])
-            return 1
-        else:
-            print("Inversion pair:", array[0], "!>", array[1])
-            return 0
     
     halfPoint = len(array) // 2
     leftArray = array[:halfPoint]
     rightArray = array[halfPoint:]
     
-    return countInversions(leftArray) + countInversions(rightArray)
+    countInversions(leftArray)
+    countInversions(rightArray)
+    
+    leftIndex = 0
+    rightIndex = 0
+    i = 0
+    
+    while i < len(leftArray) and rightIndex < len(rightArray):
+        if leftArray[leftIndex] < rightArray[rightIndex]:
+            array[i] = leftArray[leftIndex]
+            leftIndex += 1
+        else:
+            array[i] = rightArray[rightIndex]
+            rightIndex += 1  
+        i += 1
+        
+    # Adding the remaining elements to the array
+    while leftIndex < len(leftArray):
+        array[i] = leftArray[leftIndex]
+        i += 1
+        leftIndex += 1
+        
+    while rightIndex < len(rightArray):
+        array[i] = rightArray[rightIndex]
+        i += 1
+        rightIndex += 1
+        
+    
 
 def countInversions2(array, index):
     # -if the array is empty, return 0
@@ -51,7 +72,7 @@ def countInversions2(array, index):
 def main():
     print("-----")
     print("The inversion pairs are:")
-    array = [9, 8, 4, 5]
+    array = [9, 8, 4, 5, 99, 112, 1]
     print("The number of inversions with the array", array, "is:", countInversions(array))
 
     print("-----")
