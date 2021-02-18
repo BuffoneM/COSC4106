@@ -11,67 +11,53 @@
 # (inversions are 9 > 8,  9 > 4,  9 > 5,  8 > 4,  8 > 5)
 ###
 
-def mergeSort(array, tempArray, left, right):
+def mergeSort(array, left, right):
     count = 0
-    if left >= right:
-        return count
+    if left < right:
+        # Split the problem into two, then add the count result for each half
+        middle = (left + right) // 2
+        count += mergeSort(array, left, middle)
+        count += mergeSort(array, middle + 1, right)
+        count += merge(array, left, middle, right)
+    return count
     
-    middle = (left + right) // 2
-    count += mergeSort(array, tempArray, left, middle)
-    count += mergeSort(array, tempArray, middle + 1, right)
-    count += mergeInversions(array, tempArray, left, middle, right)
+def merge(array, left, middle, right):
+    leftArray = array[left:middle + 1]
+    rightArray = array[middle + 1: right + 1]
+    print(leftArray, rightArray)
     
-
-def mergeInversions(array, tempArray, left, middle, right):
-    i = left
-    j = middle + 1
+    i = 0
+    j = 0
     k = left
     count = 0
-    
-    while i <= mid and j <= right:
-        if array[i] <= array[j]:
-            tempArray[k] = array[i]
+
+    # Increment count when the value in the left array is > value in right array
+    while i < len(leftArray) and j < len(rightArray):
+        if leftArray[i] <= rightArray[j]:
+            array[k] = leftArray[i]
             i += 1
-            k += 1
         else:
-            tempArray[k] = array[j]
-            count += middle - i + 1
+            array[k] = rightArray[j]
+            count += (middle + 1) - (left + i)
             j += 1
-            k += 1
+        k += 1        
     
-
+    while i < len(leftArray):
+        array[k] = leftArray[i]
+        i += 1
+        k += 1
+    while j < len(rightArray):
+        array[k] = rightArray[j]
+        j += 1
+        k += 1
     
-
-
-def countInversions2(array, index):
-    # -if the array is empty, return 0
-    # -if we've compared all items, remove the first element in the
-    #  array and restart at index 1 (We don't compare the item to itself)
-    if(array == []):
-        return 0
-    if(index == len(array)):
-        print()
-        return countInversions2(array[1:], 1)
-
-    print(array, " at ", index, ": ", end="", sep="")
-
-    # recursive call- if inversion, add 1
-    if(array[0] > array[index]):
-        print(array[0], ">", array[index])
-        return 1 + countInversions2(array, index + 1)
-    else:
-        print(array[0], "!>", array[index])
-        return countInversions2(array, index + 1)
-
+    return count
 
 def main():
     print("-----")
-    print("The inversion pairs are:")
     array = [9, 8, 4, 5]
-    nA, count = mergeSortInversions(array)
-    print("The number of inversions with the array", array, "is:", count)    
-    #print("The number of inversions with the array", array, "is:", mergeSortInversions(array))
-
+    print("Splitting ", array, " into pieces:", sep="")
+    print("The number of inversions with the array", array, "is:", mergeSort(array, 0, len(array) - 1))
     print("-----")
 
 
