@@ -67,6 +67,7 @@ def horspool(text, pattern, shiftTable):
                     # Add the null value and continue because we haven't found it
                     m += shiftTable[len(shiftTable) - 1][1]
                     foundString = False
+                    break
                 temp += 1
             
             if foundString == True:
