@@ -9,23 +9,6 @@
 # (b) the searching result (whether the pattern is in the text or not)
 ###
 
-def main():
-    print("-----")
-    userText = input("Enter a text: ")
-    userPattern = input("Enter a pattern: ")
-    print("\nGenerating the table for:", userPattern)
-    
-    shiftTable = generateShiftTable(userPattern)
-    print(shiftTable)
-        
-    print("\nDoes '", userPattern, "' exist in '", userText, "'?\n-", sep="")
-    if horspool(userText, userPattern, shiftTable):
-        print(userPattern, " exists in the string '", userText, "'", sep = "")
-    else:
-        print(userPattern, " does not exist in the string '", userText, "'", sep = "")
-    
-    print("-----")
-
 def generateShiftTable(pattern):
     shiftTable = []
             
@@ -85,6 +68,23 @@ def findValue(array, key):
             return values
     
     return (array[len(array) - 1])
+
+def main():
+    print("-----")
+    userText = input("Enter a text: ")
+    userPattern = input("Enter a pattern: ")
+    print("\nGenerating the table for:", userPattern)
+    
+    shiftTable = generateShiftTable(userPattern)
+    print(shiftTable)
+        
+    print("\nDoes '", userPattern, "' exist in '", userText, "'?\n-", sep="")
+    if horspool(userText, userPattern, shiftTable):
+        print(userPattern, " exists in the string '", userText, "'", sep = "")
+    else:
+        print(userPattern, " does not exist in the string '", userText, "'", sep = "")
+    
+    print("-----")
     
 if __name__ == "__main__":
     main()
