@@ -41,23 +41,24 @@ def greedyTechnique(array):
     for job in array: print(job.toString())
     print("The maximum number job deadline is:", numJobs)
 
-    bestJobs = []
+    bestJobs = ['.'] * numJobs
     profit = 0
-    numJobs += 1
-    for i in range (numJobs):
-        print(numJobs)
+    # While there is still jobs to be filled
+    while bestJobs.count('.') > 0:
         curr = array.pop()
         
-        numJobs -= 1
-        if curr.getDeadline() <= numJobs:
-            bestJobs.append(curr)
-            profit += curr.getProfit()
-        else:
-            numJobs += 1
-        
-        
+        # Go through the number of jobs from right to left depending on the max deadline
+        for i in range (curr.getDeadline() - 1, -1, -1):
+            
+            # If there's an opening, insert the job
+            if bestJobs[i] == '.':
+                bestJobs[i] = curr
+                profit += curr.getProfit()
+                break
+             
     print("\nThe jobs that should be completed are:")
-    for job in bestJobs: print(job.toString())
+    for job in bestJobs: 
+        print(job.toString())
     print("Max profit =", profit)
     print("---")    
     
