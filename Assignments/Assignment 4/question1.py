@@ -20,17 +20,21 @@ def print2dArray(x, y, m, n, array):
     for i in range(0, m):
         print(x[i], array[i])
         
-def subsequenceSolver(x, y, array, m, n):    
-   for i in range(0, m):
-       for j in range(0, n):
-           if x[i] == y[j]:
-               array[i][j] = array[i-1][j-1] + 1
-           else:
-               array[i][j] = max(array[i-1][j], array[i][j-1])
+def subsequenceSolver(x, y, array, m, n): 
+    substringSolution = ""
+    for i in range(1, m):
+        for j in range(1, n):
+            if x[i] == y[j]:
+                substringSolution += x[i]
+                print(substringSolution)
+                array[i][j] = array[i-1][j-1] + 1
+            else:
+                substringSolution = ""
+                array[i][j] = max(array[i-1][j], array[i][j-1])
                               
     print2dArray(x, y, m, n, array)
-        
-
+    return substringSolution
+     
 def main():
     print("-----")
     
@@ -47,8 +51,8 @@ def main():
     print()
     print2dArray(x, y, m, n, array)
     print("Solving longest common subsequence for Y and Y:")
-    subsequenceSolver(x, y, array, m, n)
-    
+    answer = subsequenceSolver(x, y, array, m, n)
+    print("The longest subsequence is:", answer)
     print("-----")
     
 if __name__ == "__main__":
