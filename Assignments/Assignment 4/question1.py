@@ -25,34 +25,39 @@ def subsequenceSolver(x, y, array, m, n):
     for i in range(1, m):
         for j in range(1, n):
             if x[i] == y[j]:
-                substringSolution += x[i]
-                print(substringSolution)
                 array[i][j] = array[i-1][j-1] + 1
             else:
-                substringSolution = ""
                 array[i][j] = max(array[i-1][j], array[i][j-1])
-                              
+    
+    # Get the longest subsequence from the last row in the sequence array
+    for i in range(1, n):
+        # Only add the characters from y where it changes in the array
+        if array[m-1][i] == array[m-1][i-1]: continue
+        substringSolution += y[i]
+                                  
     print2dArray(x, y, m, n, array)
     return substringSolution
-     
-def main():
-    print("-----")
-    
-    x = "xABCB"
-    y = "yBDCAB"
+
+def solver(x, y):
+    x = "x" + x
+    y = "y" + y
     m = len(x)
     n = len(y)
     array = [[0 for i in range(n)] for j in range(m)]
     
-    print("X string:", x[1:])
-    print("Y string:", y[1:])
-    print("m =", m-1)
-    print("n =", n-1)
-    print()
+    print("X string:", x[1:], "\nY string:", y[1:])
+    print("m =", m-1, "\nn =", n-1, "\n")
     print2dArray(x, y, m, n, array)
-    print("Solving longest common subsequence for Y and Y:")
-    answer = subsequenceSolver(x, y, array, m, n)
-    print("The longest subsequence is:", answer)
+    print("\nSolving longest common subsequence for X and Y:")
+    print("The longest subsequence is:", subsequenceSolver(x, y, array, m, n))
+     
+def main():
+    print("-----")
+
+    solver("ABCB", "BDCAB")
+    print("---")
+    solver("ABCBDAB", "BDCABA")
+    
     print("-----")
     
 if __name__ == "__main__":
