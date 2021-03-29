@@ -5,8 +5,12 @@
 #
 ###
 def recursiveSolution(workSchedule, n):
-
-    print("1234")
+    if(n == 0):
+        return max(workSchedule[0][n], workSchedule[1][n])
+    
+    if(recursiveSolution)
+    
+    return max(workSchedule[0][n-1], workSchedule[1][n-1]) + recursiveSolution(workSchedule, n-1)
 
 def main():
     print("-----")
