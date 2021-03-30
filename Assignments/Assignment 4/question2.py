@@ -3,7 +3,9 @@
 # March 29th, 2021
 # COSC4106 Assignment 4 : Question 2
 #
+# Recursive problem involving calculating the max value for a work schedule
 ###
+
 def solve(workSchedule, n):
     # Base case 1: the "none" case
     if(n == 0):
