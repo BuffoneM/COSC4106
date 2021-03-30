@@ -4,13 +4,16 @@
 # COSC4106 Assignment 4 : Question 2
 #
 ###
-def recursiveSolution(workSchedule, n):
+def solve(workSchedule, n):
+    # Base case 1: the "none" case
     if(n == 0):
-        return max(workSchedule[0][n], workSchedule[1][n])
+        return 0
     
-    if(recursiveSolution)
+    # Base case 2: return the better job if for low / high stress
+    if(n == 1):
+        return max(workSchedule[0][n-1], workSchedule[1][n-1])
     
-    return max(workSchedule[0][n-1], workSchedule[1][n-1]) + recursiveSolution(workSchedule, n-1)
+    return max(workSchedule[0][n-1] + solve(workSchedule, n-1), workSchedule[1][n-1] + solve(workSchedule, n-2))
 
 def main():
     print("-----")
@@ -19,7 +22,7 @@ def main():
     workSchedule = [[10, 1, 10, 10], 
                     [5, 50, 5, 1]]
     
-    print("The value of the current work schedule is:", recursiveSolution(workSchedule, n))
+    print("The best value of the work schedule is:", solve(workSchedule, n))
     
     print("-----")
     
