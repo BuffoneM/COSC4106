@@ -24,7 +24,7 @@ def main():
     workSchedule = [[10, 1, 10, 10], 
                     [5, 50, 5, 1]]
     
-    print("The best value of the work schedule is:", solve(workSchedule, n))
+    print("The best value of the work schedule:\n", workSchedule[0], "\n", workSchedule[1], "\nis:", solve(workSchedule, n))
     
     print("-----")
     
